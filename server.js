@@ -8,10 +8,22 @@ const port = 3000;
 
 const server = createServer((req, res) => {
     const parsedUrl = url.parse(req.url, true);
-    if (req.method === 'GET' && parsedUrl.path === '/hello') {
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'text/plain');
-        res.end('Hello World !');
+    res.setHeader('Content-Type', 'text/plain');
+    // Note: This is for debuging purpose
+    //console.log('parsedUrl: ' + JSON.stringify(parsedUrl))
+
+    if (req.method === 'GET' && parsedUrl.pathname === '/hello') {
+        let query = parsedUrl.query
+        if(query.name !== undefined) {
+            res.statusCode = 200; //Ok, @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
+            res.end('Hello ' + query.name + ' !');
+        } else {
+            res.statusCode = 400; // Bad request
+            res.end("Please set the parameter 'name' ")
+        }
+    } else {
+        res.statusCode = 404 // Not found
+        res.end('Not found')
     }
 });
 
