@@ -11,5 +11,7 @@ npm -v // pour afficher la version
 ### 5 - Modifier le endpoint '/hello' pour prendre un paramètre 'name' et l'afficher comme suit :
 'Hello <name> !'
 #### Exemples:
+http://localhost:3000/hello?name=Coumba
 name = 'Coumba', ==> 'Hello Coumba !'
+http://localhost:3000/hello?name=Pathé
 name = 'Pathé', ==> 'Hello Pathé !'
